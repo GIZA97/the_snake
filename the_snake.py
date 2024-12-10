@@ -77,7 +77,7 @@ class Snake(GameObject):
     def __init__(self):
         """Инициализирует змейку."""
         self.length = 1
-        self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
+        self.positionа = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
         self.direction = RIGHT
         self.next_direction = None
         self.body_color = SNAKE_COLOR
@@ -85,7 +85,7 @@ class Snake(GameObject):
 
     def get_head_position(self):
         """Возвращает текущую позицию головы змейки."""
-        return self.positions[0]
+        return self.positionа[0]
 
     def move(self):
         """
@@ -100,24 +100,24 @@ class Snake(GameObject):
         new_head_x = (x0 + dx * GRID_SIZE) % SCREEN_WIDTH
         new_head_y = (y0 + dy * GRID_SIZE) % SCREEN_HEIGHT
         new_head_position = (new_head_x, new_head_y)
-        if new_head_position in self.positions[2:]:
+        if new_head_position in self.positionа[2:]:
             self.reset()
             return
-        self.positions.insert(0, new_head_position)
-        if len(self.positions) > self.length:
-            self.last = self.positions.pop()
+        self.positionа.insert(0, new_head_position)
+        if len(self.positionа) > self.length:
+            self.last = self.positionа.pop()
         else:
             self.last = None
 
     def draw(self):
         """Рисует змейку на игровом поле."""
-        for position in self.positions[:-1]:
+        for position in self.positionа[:-1]:
             rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, self.body_color, rect)
             pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
         # Отрисовка головы змейки
-        head_rect = pygame.Rect(self.positions[0], (GRID_SIZE, GRID_SIZE))
+        head_rect = pygame.Rect(self.positionа[0], (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, head_rect)
         pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
 
@@ -129,7 +129,7 @@ class Snake(GameObject):
     def reset(self):
         """Сбрасывает состояние змейки в начальное положение."""
         self.length = 1
-        self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
+        self.positionа = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
         directions = [UP, DOWN, LEFT, RIGHT]
         self.direction = choice(directions)
         self.next_direction = None
@@ -179,7 +179,7 @@ def main():
         if snake.get_head_position() == apple.position:
             snake.length += 1
             apple.position = apple.randomize_position()
-        if snake.get_head_position() in snake.positions[2:]:
+        if snake.get_head_position() in snake.positionа[2:]:
             snake.reset()
         screen.fill(BOARD_BACKGROUND_COLOR)
         apple.draw()  # Отрисовка яблока
