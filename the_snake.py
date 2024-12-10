@@ -40,9 +40,9 @@ clock = pygame.time.Clock()
 
 class GameObject:
     """Базовый класс для игровых объектов."""
-    
+
     def __init__(self):
-        """Инициализирует объект с позицией по умолчанию и цветом тела."""
+        """Инициализирует объект."""
         self.position = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
         self.body_color = SNAKE_COLOR
 
@@ -53,9 +53,9 @@ class GameObject:
 
 class Apple(GameObject):
     """Класс для яблока на игровом поле."""
-    
+
     def __init__(self):
-        """Инициализирует яблоко с начальной случайной позицией и цветом."""
+        """Инициализирует яблоко."""
         self.position = self.randomize_position()
         self.body_color = APPLE_COLOR
 
@@ -73,7 +73,7 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Класс для представления змейки в игре."""
-    
+
     def __init__(self):
         """Инициализирует змейку."""
         self.length = 1
@@ -172,16 +172,16 @@ def main():
     apple = Apple()
 
     while True:
-        clock.tick(SPEED)  # Контролирует частоту обновлений
-        handle_keys(snake)  # Обрабатывает нажатия клавиш
-        snake.update_direction()  # Обновляет направление движения змейки
+        clock.tick(SPEED)
+        handle_keys(snake)
+        snake.update_direction()
         snake.move()  # Двигает змейку
         if snake.get_head_position() == apple.position:
             snake.length += 1
             apple.position = apple.randomize_position()
         if snake.get_head_position() in snake.positions[2:]:
             snake.reset()
-        screen.fill(BOARD_BACKGROUND_COLOR)  # Очистка экрана
+        screen.fill(BOARD_BACKGROUND_COLOR)
         apple.draw()  # Отрисовка яблока
         snake.draw()  # Отрисовка змейки
         pygame.display.update()  # Обновление дисплея
