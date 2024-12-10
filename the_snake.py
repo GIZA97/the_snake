@@ -47,7 +47,7 @@ class GameObject:
         self.body_color = SNAKE_COLOR
 
     def draw(self):
-        """Метод для отрисовки объекта (должен быть переопределен в подклассах)."""
+        """Метод для отрисовки объекта."""
         pass
 
 
@@ -75,7 +75,7 @@ class Snake(GameObject):
     """Класс для представления змейки в игре."""
     
     def __init__(self):
-        """Инициализирует змейку с начальной длиной, позицией и направлением."""
+        """Инициализирует змейку."""
         self.length = 1
         self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
         self.direction = RIGHT
@@ -176,10 +176,10 @@ def main():
         handle_keys(snake)  # Обрабатывает нажатия клавиш
         snake.update_direction()  # Обновляет направление движения змейки
         snake.move()  # Двигает змейку
-        if snake.get_head_position() == apple.position:  # Проверка съедания яблока
+        if snake.get_head_position() == apple.position:
             snake.length += 1
             apple.position = apple.randomize_position()
-        if snake.get_head_position() in snake.positions[2:]:  # Проверка на столкновение
+        if snake.get_head_position() in snake.positions[2:]:
             snake.reset()
         screen.fill(BOARD_BACKGROUND_COLOR)  # Очистка экрана
         apple.draw()  # Отрисовка яблока
